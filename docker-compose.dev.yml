@@ -1,11 +1,15 @@
 version: "2"
 services:
   datastore:
+    container_name: railsdocker-datastore
     image: busybox
     volumes:
       - bundle_install:/usr/local/bundle
   web:
-    build: .
+    container_name: railsdocker-web
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - .:/usr/src/app
     ports:
