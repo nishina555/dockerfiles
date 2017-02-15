@@ -1,0 +1,19 @@
+version: "2"
+services:
+  datastore:
+    image: busybox
+    volumes:
+      - bundle_install:/usr/local/bundle
+  web:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - '3000:3000'
+    volumes_from:
+      - datastore
+    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
+
+volumes:
+  bundle_install:
+    driver: local

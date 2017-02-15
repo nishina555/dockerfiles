@@ -1,0 +1,37 @@
+version: "2"
+services:
+  datastore:
+    image: busybox
+    volumes:
+      - bundle_install:/usr/local/bundle
+      - db:/var/lib/mysql
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes_from:
+      - datastore
+  web:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - '3000:3000'
+    volumes_from:
+      - datastore
+    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
+    environment:
+      DB_URL: "mysql2://root@database:3306"
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      DB_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  bundle_install:
+    driver: local
+  db:
+    driver: local
