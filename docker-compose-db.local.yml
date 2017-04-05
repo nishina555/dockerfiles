@@ -1,22 +1,18 @@
 version: "2"
 services:
   datastore:
-    container_name: railsdocker-datastore
     image: busybox
     volumes:
       - bundle_install:/usr/local/bundle
       - db:/var/lib/mysql
   db:
-    container_name: railsdocker-db
     image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: password
+    env_file: config/.local_env
     ports:
       - 3306:3306
     volumes_from:
       - datastore
   web:
-    container_name: railsdocker-web
     build:
       context: .
       dockerfile: Dockerfile
@@ -27,11 +23,7 @@ services:
     volumes_from:
       - datastore
     command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
-    environment:
-      DB_URL: "mysql2://root@database:3306"
-      DB_USERNAME: root
-      DB_PASSWORD: password
-      DB_HOST: db
+    env_file: config/.local_env
     depends_on:
       - db
 
