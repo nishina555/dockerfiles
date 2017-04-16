@@ -1,4 +1,4 @@
-# 準備
+# 準備(新規の場合)
 
 ## 雛形の作成
 
@@ -65,11 +65,11 @@ docker exec -it $WEB_CONTAINER_NAME /bin/bash
 docker exec -it $DB_CONTAINER_NAME /bin/bash
 例. docker exec -it railsdockerstarter_db_1 /bin/bash
 
--> 以下、必要なコマンドをコンテナで実行する(「コマンド一覧」参考)
-
 ※コンテナにログインせずに直接コマンド実行したい場合、上記の/bin/bashの部分をコンテナで実行するコマンドに変更すればいい。
 (例. docker exec -it railsdockerstrater_web_1 bundle exec rails db)
 ```
+
+以下、必要なコマンドをコンテナで実行する(「コマンド一覧」参考)
 
 # コマンド一覧
 
@@ -103,9 +103,7 @@ psql -u $DB_USERNAME -D $DATABASE_NAME -p$DB_PASSWORD
 ```
 
 
-# 既存のアプリをDocker化する場合
-
-## 準備
+# 準備(既存のアプリをDocker化する場合)
 
 ```
 # アプリのディレクトリへ移動
