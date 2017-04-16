@@ -1,0 +1,21 @@
+version: "2"
+services:
+  datastore:
+    image: busybox
+    volumes:
+      - bundle_install:/usr/local/bundle
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 3000:3000
+    volumes_from:
+      - datastore
+    command: /sbin/init
+
+volumes:
+  bundle_install:
+    driver: local

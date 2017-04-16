@@ -1,0 +1,36 @@
+version: "2"
+services:
+  datastore:
+    image: busybox
+    volumes:
+      - bundle_install:/usr/local/bundle
+      - db:/var/lib/postgresql/data
+  db:
+    image: postgres:9.6.2
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 5432:5432
+    volumes_from:
+      - datastore
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 3000:3000
+    volumes_from:
+      - datastore
+    command: /sbin/init
+    env_file: .env.dev
+    depends_on:
+      - db
+
+volumes:
+  bundle_install:
+    driver: local
+  db:
+    driver: local

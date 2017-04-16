@@ -11,10 +11,10 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
-      - '3000:3000'
+      - 3000:3000
     volumes_from:
       - datastore
-    command: ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
+    command: /sbin/init
 
 volumes:
   bundle_install:

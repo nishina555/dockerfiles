@@ -1,6 +1,0 @@
-DB_URL: "mysql2://root@database:3306"
-
-DB_USERNAME: root
-DB_PASSWORD: password
-DB_HOST: db
-DB_NAME: test
