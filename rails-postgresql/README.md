@@ -76,6 +76,18 @@ docker exec -it $DB_CONTAINER_NAME /bin/bash
 ## web
 
 ```
+# springのインストール
+bundle exec spring binstub --all
+
+# springのステータス
+bin/spring status
+
+# springの停止
+bin/spring stop
+
+# springを利用したrails(rake)コマンドの実行
+bundle exec ***の代わりにbin/***を使うようにする
+
 # railsを実行
 bundle exec rails s -b 0.0.0.0
 
