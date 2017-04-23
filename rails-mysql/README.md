@@ -16,12 +16,13 @@ echo "source 'https://rubygems.org'\ngem 'rails', '5.0.0.1'"> Gemfile
 # イメージの構築
 docker-compose build
 
-# docker volumeの確認
-docker volume ls
--> bundleとdbのvolumeが作成されていることを確認
 
 # railsの雛形作成
 docker-compose run --rm web bundle exec rails new . --force --database=mysql --skip-bundle　-d
+
+# docker volumeの確認
+docker volume ls
+-> bundleとdbのvolumeが作成されていることを確認
 
 # プロセス確認
 docker ps
